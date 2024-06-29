@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Number Quiz</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="container text-center pt-3">
+      <h1 class="py-1">Mini game</h1>
+      <form action="" class="">
+        <h2 class="start__game text-success">CLICK BUTTON BELOW TO START</h2>
+        <div><i class="fa fa-long-arrow-alt-down"></i></div>
+        <ion-icon
+          name="radio-button-on-outline"
+          data-bs-toggle="tooltip"
+          data-bs-placement="right"
+          data-bs-custom-class="custom-tooltip"
+          title="Start game"
+          aria-expanded="true"
+        ></ion-icon>
+
+        <div class="form-input">
+          <label class="py-3 text-danger form-label"
+            >Nhập vào dãy số nguyên</label
+          >
+          <div class="d-flex">
+            <input
+              type="text"
+              class="form-control mt-1"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              title="Hãy ghi nhớ dãy số của bạn"
+              aria-expanded="false"
+              placeholder="Nhập vào 1 dãy số nguyên, cách nhau bằng dấu phẩy"
+            />
+            <button
+              type="button"
+              class="btn btn-success text-white let__go"
+              onclick="showGame()"
+            >
+              LET'S GO
+            </button>
+          </div>
+        </div>
+      </form>
+      <div class="timer"></div>
+      <div class="question question__1 text-start my-5 py-3 px-4">
+        <div class="d-flex justify-content-between pb-3">
+          <div>Câu 1/10</div>
+          <div class="text-success">Câu trả lời của bạn</div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center pb-3">
+          <h4 class="col-8">Tổng các số dương trong dãy số?</h4>
+          <input type="checkbox" checked class="form-control" />
+          <input
+            type="text"
+            class="user__answer col-3"
+            placeholder="Nhập -1 nếu không có"
+          />
+          <div
+            class="col-1 d-flex justify-content-center align-items-center"
+            onclick="showAnswer('.answer', 0)"
+          >
+            <span
+              class="fa-regular fa-square-plus active"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              title="Nhấp vào để xem kết quả"
+              aria-expanded="true"
+            ></span>
+            <span
+              class="fa-regular fa-square-minus"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              aria-expanded="false"
+              title="Nhấp vào để ẩn kết quả"
+            ></span>
+          </div>
+        </div>
+        <div class="answer d-flex justify-content-between">
+          <p class="text-success">
+            Chính xác! Chúc mừng bạn được cộng thêm 1 điểm
+          </p>
+          <div class="">
+            <span
+              class="fa fa-angle-left"
+              style="color: rgb(211, 210, 208)"
+            ></span>
+            <span onclick="showQuestion('.question', 0, 1)">
+              <i class="fa fa-angle-right"> </i> Next</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="question question__2 text-start my-5 py-3 px-4">
+        <div class="d-flex justify-content-between pb-3">
+          <div>Câu 2/10</div>
+          <div class="text-success">Câu trả lời của bạn</div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center pb-3">
+          <h4 class="col-8">Có bao nhiêu số dương trong dãy số?</h4>
+          <input type="checkbox" checked class="form-control" />
+          <input
+            type="text"
+            class="user__answer col-3"
+            placeholder="Nhập -1 nếu không có"
+          />
+          <div
+            class="col-1 d-flex justify-content-center align-items-center"
+            onclick="showAnswer('.answer', 1)"
+          >
+            <span
+              class="fa-regular fa-square-plus active"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              title="Nhấp vào để xem kết quả"
+              aria-expanded="true"
+            ></span>
+            <span
+              class="fa-regular fa-square-minus"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              aria-expanded="false"
+              title="Nhấp vào để ẩn kết quả"
+            ></span>
+          </div>
+        </div>
+        <div class="answer d-flex justify-content-between">
+          <p class="text-success">
+            Chính xác! Chúc mừng bạn được cộng thêm 1 điểm
+          </p>
+          <div class="">
+            <span onclick="showQuestion('.question', 1, -1)">
+              Previous <i class="fa fa-angle-left"> </i
+            ></span>
+            <span onclick="showQuestion('.question', 1, 1)"
+              ><i class="fa fa-angle-right"> </i> Next</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="question question__2 text-start my-5 py-3 px-4">
+        <div class="d-flex justify-content-between pb-3">
+          <div>Câu 3/10</div>
+          <div class="text-success">Câu trả lời của bạn</div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center pb-3">
+          <h4 class="col-8">Số nhỏ nhất trong dãy số là số mấy?</h4>
+          <input type="checkbox" checked class="form-control" />
+          <input
+            type="text"
+            class="user__answer col-3"
+            placeholder="Nhập vào câu trả lời"
+          />
+          <div
+            class="col-1 d-flex justify-content-center align-items-center"
+            onclick="showAnswer('.answer', 2)"
+          >
+            <span
+              class="fa-regular fa-square-plus active"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              title="Nhấp vào để xem kết quả"
+              aria-expanded="true"
+            ></span>
+            <span
+              class="fa-regular fa-square-minus"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              aria-expanded="false"
+              title="Nhấp vào để ẩn kết quả"
+            ></span>
+          </div>
+        </div>
+        <div class="answer d-flex justify-content-between">
+          <p class="text-success">
+            Chính xác! Chúc mừng bạn được cộng thêm 1 điểm
+          </p>
+          <div class="">
+            <span onclick="showQuestion('.question', 2, -1)">
+              Previous <i class="fa fa-angle-left"> </i
+            ></span>
+            <span onclick="showQuestion('.question', 2, 1)"
+              ><i class="fa fa-angle-right"> </i> Next</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="question question__2 text-start my-5 py-3 px-4">
+        <div class="d-flex justify-content-between pb-3">
+          <div>Câu 4/10</div>
+          <div class="text-success">Câu trả lời của bạn</div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center pb-3">
+          <h4 class="col-8">Số dương nhỏ nhất trong dãy số là số mấy?</h4>
+          <input type="checkbox" checked class="form-control" />
+          <input
+            type="text"
+            class="user__answer col-3"
+            placeholder="Nhập -1 nếu không có"
+          />
+          <div
+            class="col-1 d-flex justify-content-center align-items-center"
+            onclick="showAnswer('.answer', 3)"
+          >
+            <span
+              class="fa-regular fa-square-plus active"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              title="Nhấp vào để xem kết quả"
+              aria-expanded="true"
+            ></span>
+            <span
+              class="fa-regular fa-square-minus"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              aria-expanded="false"
+              title="Nhấp vào để ẩn kết quả"
+            ></span>
+          </div>
+        </div>
+        <div class="answer d-flex justify-content-between">
+          <p class="text-success">
+            Chính xác! Chúc mừng bạn được cộng thêm 1 điểm
+          </p>
+          <div class="">
+            <span onclick="showQuestion('.question', 3, -1)">
+              Previous <i class="fa fa-angle-left"> </i
+            ></span>
+            <span onclick="showQuestion('.question', 3, 1)"
+              ><i class="fa fa-angle-right"> </i> Next</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="question question__2 text-start my-5 py-3 px-4">
+        <div class="d-flex justify-content-between pb-3">
+          <div>Câu 5/10</div>
+          <div class="text-success">Câu trả lời của bạn</div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center pb-3">
+          <h4 class="col-8">Số chẵn cuối cùng là số mấy?</h4>
+          <input type="checkbox" checked class="form-control" />
+          <input
+            type="text"
+            class="user__answer col-3"
+            placeholder="Nhập -1 nếu không có"
+          />
+          <div
+            class="col-1 d-flex justify-content-center align-items-center"
+            onclick="showAnswer('.answer', 4)"
+          >
+            <span
+              class="fa-regular fa-square-plus active"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              title="Nhấp vào để xem kết quả"
+              aria-expanded="true"
+            ></span>
+            <span
+              class="fa-regular fa-square-minus"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              aria-expanded="false"
+              title="Nhấp vào để ẩn kết quả"
+            ></span>
+          </div>
+        </div>
+        <div class="answer d-flex justify-content-between">
+          <p class="text-success">
+            Chính xác! Chúc mừng bạn được cộng thêm 1 điểm
+          </p>
+          <div class="">
+            <span onclick="showQuestion('.question', 4, -1)">
+              Previous <i class="fa fa-angle-left"> </i
+            ></span>
+            <span onclick="showQuestion('.question', 4, 1)"
+              ><i class="fa fa-angle-right"> </i> Next</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="question question__2 text-start my-5 py-3 px-4">
+        <div class="d-flex justify-content-between pb-3">
+          <div>Câu 6/10</div>
+          <div class="text-success">Câu trả lời của bạn</div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center pb-3">
+          <h4 class="col-4">Sắp xếp lại dãy số</h4>
+          <input type="checkbox" checked class="form-control" />
+          <input
+            type="text"
+            class="col-3"
+            placeholder="Hai vị trí muốn đổi chỗ"
+          />
+          <input type="text" class="col-4" placeholder="Nhập vào dãy số mới" />
+          <div
+            class="col-1 d-flex justify-content-center align-items-center"
+            onclick="showAnswer('.answer', 5)"
+          >
+            <span
+              class="fa-regular fa-square-plus active"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              title="Nhấp vào để xem kết quả"
+              aria-expanded="true"
+            ></span>
+            <span
+              class="fa-regular fa-square-minus"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              aria-expanded="false"
+              title="Nhấp vào để ẩn kết quả"
+            ></span>
+          </div>
+        </div>
+        <div class="answer d-flex justify-content-between">
+          <p class="text-success">
+            Chính xác! Chúc mừng bạn được cộng thêm 1 điểm
+          </p>
+          <div class="">
+            <span onclick="showQuestion('.question', 5, -1)">
+              Previous <i class="fa fa-angle-left"> </i
+            ></span>
+            <span onclick="showQuestion('.question', 5, 1)"
+              ><i class="fa fa-angle-right"> </i> Next</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="question question__2 text-start my-5 py-3 px-4">
+        <div class="d-flex justify-content-between pb-3">
+          <div>Câu 7/10</div>
+          <div class="text-success">Câu trả lời của bạn</div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center pb-3">
+          <h4 class="col-8">Sắp xếp mảng theo giá trị tăng</h4>
+          <input type="checkbox" checked class="form-control" />
+          <input
+            type="text"
+            class="user__answer col-3"
+            placeholder="Nhập vào câu trả lời"
+          />
+          <div
+            class="col-1 d-flex justify-content-center align-items-center"
+            onclick="showAnswer('.answer', 6)"
+          >
+            <span
+              class="fa-regular fa-square-plus active"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              title="Nhấp vào để xem kết quả"
+              aria-expanded="true"
+            ></span>
+            <span
+              class="fa-regular fa-square-minus"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              aria-expanded="false"
+              title="Nhấp vào để ẩn kết quả"
+            ></span>
+          </div>
+        </div>
+        <div class="answer d-flex justify-content-between">
+          <p class="text-success">
+            Chính xác! Chúc mừng bạn được cộng thêm 1 điểm
+          </p>
+          <div class="">
+            <span onclick="showQuestion('.question', 6, -1)">
+              Previous <i class="fa fa-angle-left"> </i
+            ></span>
+            <span onclick="showQuestion('.question', 6, 1)"
+              ><i class="fa fa-angle-right"> </i> Next</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="question question__2 text-start my-5 py-3 px-4">
+        <div class="d-flex justify-content-between pb-3">
+          <div>Câu 8/10</div>
+          <div class="text-success">Câu trả lời của bạn</div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center pb-3">
+          <h4 class="col-8">Số nguyên tố đầu tiên trong mảng?</h4>
+          <input type="checkbox" checked class="form-control" />
+          <input
+            type="text"
+            class="user__answer col-3"
+            placeholder="Nhập -1 nếu không có"
+          />
+          <div
+            class="col-1 d-flex justify-content-center align-items-center"
+            onclick="showAnswer('.answer', 7)"
+          >
+            <span
+              class="fa-regular fa-square-plus active"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              title="Nhấp vào để xem kết quả"
+              aria-expanded="true"
+            ></span>
+            <span
+              class="fa-regular fa-square-minus"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              aria-expanded="false"
+              title="Nhấp vào để ẩn kết quả"
+            ></span>
+          </div>
+        </div>
+        <div class="answer d-flex justify-content-between">
+          <p class="text-success">
+            Chính xác! Chúc mừng bạn được cộng thêm 1 điểm
+          </p>
+          <div class="">
+            <span onclick="showQuestion('.question', 7, -1)">
+              Previous <i class="fa fa-angle-left"> </i
+            ></span>
+            <span onclick="showQuestion('.question', 7, 1)"
+              ><i class="fa fa-angle-right"> </i> Next</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="question question__2 text-start my-5 py-3 px-4">
+        <div class="d-flex justify-content-between pb-3">
+          <div>Câu 9/10</div>
+          <div class="text-success">Câu trả lời của bạn</div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center pb-3">
+          <h4 class="col-5">Có bao nhiêu số nguyên?</h4>
+          <input type="checkbox" checked class="form-control" />
+          <input
+            type="text"
+            class="col-4"
+            placeholder="Nhập vào mảng số thực"
+          />
+          <input type="text" class="col-2" placeholder="Tổng số nguyên" />
+          <div
+            class="col-1 d-flex justify-content-center align-items-center"
+            onclick="showAnswer('.answer', 8)"
+          >
+            <span
+              class="fa-regular fa-square-plus active"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              title="Nhấp vào để xem kết quả"
+              aria-expanded="true"
+            ></span>
+            <span
+              class="fa-regular fa-square-minus"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              aria-expanded="false"
+              title="Nhấp vào để ẩn kết quả"
+            ></span>
+          </div>
+        </div>
+        <div class="answer d-flex justify-content-between">
+          <p class="text-success">
+            Chính xác! Chúc mừng bạn được cộng thêm 1 điểm
+          </p>
+          <div class="">
+            <span onclick="showQuestion('.question', 8, -1)">
+              Previous <i class="fa fa-angle-left"> </i
+            ></span>
+            <span onclick="showQuestion('.question', 8, 1)"
+              ><i class="fa fa-angle-right"> </i> Next</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="question question__2 text-start my-5 py-3 px-4">
+        <div class="d-flex justify-content-between pb-3">
+          <div>Câu 10/10</div>
+          <div class="text-success">Câu trả lời của bạn</div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center pb-3">
+          <h4 class="col-6">Số âm hay số dương nhiều hơn?</h4>
+          <input type="checkbox" checked class="form-control" />
+          <input
+            type="text"
+            class="user__answer col-5"
+            placeholder="nhập '0' nếu là số âm, '1'nếu là số dương"
+          />
+          <div
+            class="col-1 d-flex justify-content-center align-items-center"
+            onclick="showAnswer('.answer', 9)"
+          >
+            <span
+              class="fa-regular fa-square-plus active"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              title="Nhấp vào để xem kết quả"
+              aria-expanded="true"
+            ></span>
+            <span
+              class="fa-regular fa-square-minus"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              data-bs-custom-class="custom-tooltip"
+              aria-expanded="false"
+              title="Nhấp vào để ẩn kết quả"
+            ></span>
+          </div>
+        </div>
+        <div class="answer">
+          <div class="d-flex justify-content-between">
+            <p class="text-success">
+              Chính xác! Chúc mừng bạn được cộng thêm 1 điểm
+            </p>
+            <div class="">
+              <span onclick="showQuestion('.question', 9, -1)">
+                Previous <i class="fa fa-angle-left"> </i
+              ></span>
+              <span
+                ><i class="fa fa-angle-right" style="color: rgb(211, 210, 208)">
+                </i>
+              </span>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-success text-white">Done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="score"></div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="./js/index.js"></script>
+  </body>
+</html>
