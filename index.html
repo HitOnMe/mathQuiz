@@ -52,17 +52,13 @@
               aria-expanded="false"
               placeholder="Nhập vào 1 dãy số nguyên, cách nhau bằng dấu phẩy"
             />
-            <button
-              type="button"
-              class="btn btn-success text-white let__go"
-              onclick="showGame()"
-            >
+            <button type="button" class="btn btn-success text-white let__go">
               LET'S GO
             </button>
           </div>
         </div>
       </form>
-      <div class="timer"></div>
+      <div class="score">Your score: 0/10</div>
       <div class="question question__1 text-start my-5 py-3 px-4">
         <div class="d-flex justify-content-between pb-3">
           <div>Câu 1/10</div>
@@ -78,7 +74,7 @@
             placeholder="Nhập -1 nếu không có"
           />
           <div
-            class="col-1 d-flex justify-content-center align-items-center"
+            class="show__answer col-1 d-flex justify-content-center align-items-center"
             onclick="showAnswer('.answer', 0)"
           >
             <span
@@ -89,20 +85,10 @@
               title="Nhấp vào để xem kết quả"
               aria-expanded="true"
             ></span>
-            <span
-              class="fa-regular fa-square-minus"
-              data-bs-toggle="tooltip"
-              data-bs-placement="right"
-              data-bs-custom-class="custom-tooltip"
-              aria-expanded="false"
-              title="Nhấp vào để ẩn kết quả"
-            ></span>
           </div>
         </div>
         <div class="answer d-flex justify-content-between">
-          <p class="text-success">
-            Chính xác! Chúc mừng bạn được cộng thêm 1 điểm
-          </p>
+          <p class="text-success"></p>
           <div class="">
             <span
               class="fa fa-angle-left"
@@ -128,7 +114,7 @@
             placeholder="Nhập -1 nếu không có"
           />
           <div
-            class="col-1 d-flex justify-content-center align-items-center"
+            class="show__answer col-1 d-flex justify-content-center align-items-center"
             onclick="showAnswer('.answer', 1)"
           >
             <span
@@ -138,14 +124,6 @@
               data-bs-custom-class="custom-tooltip"
               title="Nhấp vào để xem kết quả"
               aria-expanded="true"
-            ></span>
-            <span
-              class="fa-regular fa-square-minus"
-              data-bs-toggle="tooltip"
-              data-bs-placement="right"
-              data-bs-custom-class="custom-tooltip"
-              aria-expanded="false"
-              title="Nhấp vào để ẩn kết quả"
             ></span>
           </div>
         </div>
@@ -177,7 +155,7 @@
             placeholder="Nhập vào câu trả lời"
           />
           <div
-            class="col-1 d-flex justify-content-center align-items-center"
+            class="show__answer col-1 d-flex justify-content-center align-items-center"
             onclick="showAnswer('.answer', 2)"
           >
             <span
@@ -187,14 +165,6 @@
               data-bs-custom-class="custom-tooltip"
               title="Nhấp vào để xem kết quả"
               aria-expanded="true"
-            ></span>
-            <span
-              class="fa-regular fa-square-minus"
-              data-bs-toggle="tooltip"
-              data-bs-placement="right"
-              data-bs-custom-class="custom-tooltip"
-              aria-expanded="false"
-              title="Nhấp vào để ẩn kết quả"
             ></span>
           </div>
         </div>
@@ -226,7 +196,7 @@
             placeholder="Nhập -1 nếu không có"
           />
           <div
-            class="col-1 d-flex justify-content-center align-items-center"
+            class="show__answer col-1 d-flex justify-content-center align-items-center"
             onclick="showAnswer('.answer', 3)"
           >
             <span
@@ -236,14 +206,6 @@
               data-bs-custom-class="custom-tooltip"
               title="Nhấp vào để xem kết quả"
               aria-expanded="true"
-            ></span>
-            <span
-              class="fa-regular fa-square-minus"
-              data-bs-toggle="tooltip"
-              data-bs-placement="right"
-              data-bs-custom-class="custom-tooltip"
-              aria-expanded="false"
-              title="Nhấp vào để ẩn kết quả"
             ></span>
           </div>
         </div>
@@ -275,7 +237,7 @@
             placeholder="Nhập -1 nếu không có"
           />
           <div
-            class="col-1 d-flex justify-content-center align-items-center"
+            class="show__answer col-1 d-flex justify-content-center align-items-center"
             onclick="showAnswer('.answer', 4)"
           >
             <span
@@ -285,14 +247,6 @@
               data-bs-custom-class="custom-tooltip"
               title="Nhấp vào để xem kết quả"
               aria-expanded="true"
-            ></span>
-            <span
-              class="fa-regular fa-square-minus"
-              data-bs-toggle="tooltip"
-              data-bs-placement="right"
-              data-bs-custom-class="custom-tooltip"
-              aria-expanded="false"
-              title="Nhấp vào để ẩn kết quả"
             ></span>
           </div>
         </div>
@@ -325,7 +279,7 @@
           />
           <input type="text" class="col-4" placeholder="Nhập vào dãy số mới" />
           <div
-            class="col-1 d-flex justify-content-center align-items-center"
+            class="show__answer col-1 d-flex justify-content-center align-items-center"
             onclick="showAnswer('.answer', 5)"
           >
             <span
@@ -335,14 +289,6 @@
               data-bs-custom-class="custom-tooltip"
               title="Nhấp vào để xem kết quả"
               aria-expanded="true"
-            ></span>
-            <span
-              class="fa-regular fa-square-minus"
-              data-bs-toggle="tooltip"
-              data-bs-placement="right"
-              data-bs-custom-class="custom-tooltip"
-              aria-expanded="false"
-              title="Nhấp vào để ẩn kết quả"
             ></span>
           </div>
         </div>
@@ -374,7 +320,7 @@
             placeholder="Nhập vào câu trả lời"
           />
           <div
-            class="col-1 d-flex justify-content-center align-items-center"
+            class="show__answer col-1 d-flex justify-content-center align-items-center"
             onclick="showAnswer('.answer', 6)"
           >
             <span
@@ -384,14 +330,6 @@
               data-bs-custom-class="custom-tooltip"
               title="Nhấp vào để xem kết quả"
               aria-expanded="true"
-            ></span>
-            <span
-              class="fa-regular fa-square-minus"
-              data-bs-toggle="tooltip"
-              data-bs-placement="right"
-              data-bs-custom-class="custom-tooltip"
-              aria-expanded="false"
-              title="Nhấp vào để ẩn kết quả"
             ></span>
           </div>
         </div>
@@ -423,7 +361,7 @@
             placeholder="Nhập -1 nếu không có"
           />
           <div
-            class="col-1 d-flex justify-content-center align-items-center"
+            class="show__answer col-1 d-flex justify-content-center align-items-center"
             onclick="showAnswer('.answer', 7)"
           >
             <span
@@ -433,14 +371,6 @@
               data-bs-custom-class="custom-tooltip"
               title="Nhấp vào để xem kết quả"
               aria-expanded="true"
-            ></span>
-            <span
-              class="fa-regular fa-square-minus"
-              data-bs-toggle="tooltip"
-              data-bs-placement="right"
-              data-bs-custom-class="custom-tooltip"
-              aria-expanded="false"
-              title="Nhấp vào để ẩn kết quả"
             ></span>
           </div>
         </div>
@@ -461,6 +391,7 @@
       <div class="question question__2 text-start my-5 py-3 px-4">
         <div class="d-flex justify-content-between pb-3">
           <div>Câu 9/10</div>
+          <div class="text-success">Bạn hãy nhập vào dãy số thực</div>
           <div class="text-success">Câu trả lời của bạn</div>
         </div>
         <div class="d-flex justify-content-between align-items-center pb-3">
@@ -469,11 +400,11 @@
           <input
             type="text"
             class="col-4"
-            placeholder="Nhập vào mảng số thực"
+            placeholder="Nhập vào dãy số thực mới"
           />
           <input type="text" class="col-2" placeholder="Tổng số nguyên" />
           <div
-            class="col-1 d-flex justify-content-center align-items-center"
+            class="show__answer col-1 d-flex justify-content-center align-items-center"
             onclick="showAnswer('.answer', 8)"
           >
             <span
@@ -483,14 +414,6 @@
               data-bs-custom-class="custom-tooltip"
               title="Nhấp vào để xem kết quả"
               aria-expanded="true"
-            ></span>
-            <span
-              class="fa-regular fa-square-minus"
-              data-bs-toggle="tooltip"
-              data-bs-placement="right"
-              data-bs-custom-class="custom-tooltip"
-              aria-expanded="false"
-              title="Nhấp vào để ẩn kết quả"
             ></span>
           </div>
         </div>
@@ -522,7 +445,7 @@
             placeholder="nhập '0' nếu là số âm, '1'nếu là số dương"
           />
           <div
-            class="col-1 d-flex justify-content-center align-items-center"
+            class="show__answer col-1 d-flex justify-content-center align-items-center"
             onclick="showAnswer('.answer', 9)"
           >
             <span
@@ -532,14 +455,6 @@
               data-bs-custom-class="custom-tooltip"
               title="Nhấp vào để xem kết quả"
               aria-expanded="true"
-            ></span>
-            <span
-              class="fa-regular fa-square-minus"
-              data-bs-toggle="tooltip"
-              data-bs-placement="right"
-              data-bs-custom-class="custom-tooltip"
-              aria-expanded="false"
-              title="Nhấp vào để ẩn kết quả"
             ></span>
           </div>
         </div>
@@ -563,8 +478,8 @@
           </div>
         </div>
       </div>
+      <div class="timer"></div>
     </div>
-    <div class="score"></div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -1,29 +1,57 @@
 /* ...........................................................Xử lý dữ liệu đầu vào........................................................... */                                                     
 // Chỉ cho phép người dùng nhập vào tối đa <number> số thực ngăn cách bởi dấu phẩy
+
 function numberOnly(className) {
     var elements = document.querySelectorAll(className);
     elements.forEach(function(element) {
         element.addEventListener('input', function(event) {
             const input = event.target.value;
-            let numbers = input.replace(/[^\d,]/g, ''); // Loại bỏ tất cả các ký tự không phải số thực và dấu phẩy
+            let numbers = input.replace(/[^\d.,]/g, ''); // Loại bỏ tất cả các ký tự không phải số thực và dấu phẩy
             event.target.value = numbers;
         });
     }); 
 }
+function numberOnly2(className, index) {
+    var elements = document.querySelectorAll(className);
+    elements.forEach(function(element) {
+        if (element == elements[index]){
+            return element
+        } else {
+            element.addEventListener('input', function(event) {
+                const input = event.target.value;
+                let numbers = input.replace(/[^\d,]/g, ''); // Loại bỏ tất cả các ký tự không phải số nguyên và dấu phẩy
+                event.target.value = numbers;
+            });
+        }
+    }); 
+}
+function numberOnly3(className, index) {
+    var elements = document.querySelectorAll(className);
+    var eliminate = index.split(',').map(num => parseInt(num.trim(), 10)); // Chuyển đổi chuỗi thành mảng số
 
+    elements.forEach((element, i) => {
+        if (!eliminate.includes(i)) {
+            element.addEventListener('input', function(event) {
+                const input = event.target.value;
+                let numbers = input.replace(/[^\d]/g, ''); // Loại bỏ tất cả các ký tự không phải số nguyên
+                event.target.value = numbers;
+            });
+        }
+    });
+}
 /* ...........................................................Hàm xử lý kết quả ...........................................................*/
 //Hàm nhận input là dãy các chữ số, trả về mảng các số
 function exchangeArray(stringInput){
     return stringInput.split(',').map(Number)
 }
-/* Câu 1: Tính tổng số dương trong dãy số */
-function question1(numberArray) {
-    return numberArray.filter(number => number>0).join(','); //hàm trả về 1 mảng chứa các giá trị dương, output là 1 string bao gồm các chữ số
-}
 
-/* Câu 2: số các số dương */
-function question2(numberArray){
+/* Câu 1: Tính tổng số dương trong dãy số  */
+function question1(numberArray){
     return numberArray.reduce((number1, number2) => number1+number2, 0) //Output là tổng các số dương
+}
+/* Câu 2: Số các số dương*/
+function question2(numberArray) {
+    return numberArray.filter(number => number>0).length; //hàm trả về 1 mảng chứa các giá trị dương, output là số các số dương
 }
 
 /* Câu 3 : Tìm số nhỏ nhất trong mảng*/
@@ -33,7 +61,8 @@ function question3(numberArray){
     
 /* Câu 4: Tìm số dương nhỏ nhất trong mảng*/
 function question4(numberArray){
-    return Math.min(...numberArray); //output là giá trị nhỏ nhất trong các số dương
+    var positiveArray = numberArray.filter(number => number>0)
+    return question3(positiveArray); //output là giá trị nhỏ nhất trong các số dương
 }
    
 
@@ -92,81 +121,99 @@ function question10(numberArray){
 
 /*........................................................... Xử lý chức năng ...........................................................*/
 numberOnly('input')
-
-let mark=false,
-    game=document.querySelector('.start__game'),
+numberOnly2('input', 19)
+numberOnly3('input', '0, 12, 13, 15, 19')
+var begin = true,
+    startGame = false
+while (begin){
+    let game=document.querySelector('.start__game'),
+    time = document.querySelector('.timer'),
+    let__go = document.querySelector('ion-icon'),
+    score = document.querySelector('.score'),
     correctAnswer = 0,
-    inputValue= '',
-    begin = true
-document.querySelector('ion-icon').onclick = function(){
-    if (begin){
-        document.querySelector('.form-input').classList.add('active');
-        begin = false
+    inputValue = ''
+    numberArray = 0
+
+    function showQuestion(id, index, plus){
+        var question = document.querySelectorAll(id)[index],
+            questionNext =document.querySelectorAll(id)[index+plus]
+        // Toggle the 'active' class on the answer
+            question.classList.remove('active');
+            questionNext.classList.add('active')
     }
-}
-function showGame() {
-    if (mark) return;
-    if (document.querySelectorAll('input')[0].value === '') {
-        alert('vui lòng nhập số')
-    } else {
-        inputValue = document.querySelectorAll('input')[0].value; //Lấy dãy số người dùng nhập vào
-        var numberArray = exchangeArray(inputValue);
-        alert('Hãy ghi nhớ dãy số: '+ numberArray)
-        document.querySelector('.form-input').classList.remove('active');
-        document.querySelector('.timer').classList.add('active');
-        document.querySelectorAll('.question')[0].classList.add('active');
-        document.querySelector('ion-icon').classList.add('start');
-        document.querySelector('ion-icon').setAttribute('title', 'game is loading...')
-        document.querySelector('.fa-long-arrow-alt-down').style.opacity  = '0';
-        game.classList.replace('text-success', 'text-warning');
-        game.innerHTML = 'GAME LOADING...';
-        document.querySelector('.score').innerHTML = 'Số câu trả lời đúng: '+ correctAnswer +'/10';  
-        mark = true;
-        var timeRemaining = 10*60;
-        function setTimer() {
-            var minutes = Math.floor(timeRemaining / 60),
-                seconds = timeRemaining % 60;
-            seconds = seconds < 10 ? '0' + seconds : seconds;
-            document.querySelector('.timer').innerHTML = 'Time Remaining: ' + minutes + ':' + seconds;
-            if (timeRemaining <= 0) {
-                clearInterval(timerInterval);
-                document.querySelector('.timer').innerHTML = 'Hết giờ! Số câu trả lời đúng của bạn là: ' + correctAnswer;
-                game.innerHTML ='END GAME!';
-                game.classList.replace('text-warning', 'text-danger')
-                document.querySelector('ion-icon').setAttribute('title', 'Game is over!')
-            } else {
-                timeRemaining--;
-            }
+
+    function showAnswer(id, index) {
+        var answer = document.querySelectorAll(id)[index],
+        response = document.querySelectorAll('.answer p')[index],
+        userAnswer = document.querySelectorAll('.user__answer')[index].value,
+        correctAnswer  =  window[`question${index+1}`] 
+        if(userAnswer == ''){
+            alert('Vui lòng nhập câu trả lời');
+        } else{
+            answer.classList.add('active');
+        } 
+        if (userAnswer == correctAnswer(numberArray)){
+            response.innerHTML = 'Chính xác! Câu trả lời là: ' + correctAnswer(numberArray) +' <br> Chúc mừng bạn được cộng thêm 1 điểm!'
+            response.classList.replace('text-danger', 'text-success')
+            document.querySelectorAll('.answer')[index].style.transition = 'all .5s ease-in-out';
+            score+=1
+            score.innerHTML = 'Your score: '+score;
+        } else {
+            answer.classList.add('active');
+            response.innerHTML = 'Sai rồi ~ Hãy thử lại';
+            response.classList.replace('text-success', 'text-danger')
         }
+}
+   
 
-        var timerInterval = setInterval(setTimer, 1000);
-        setTimer(); // Gọi ngay lần đầu tiên để hiển thị đúng thời gian ban đầu
+document.querySelector('ion-icon').onclick = function(){
+    document.querySelector('.form-input').classList.add('active');
+    startGame = true
+    while (startGame) {
+        document.querySelector('.form-input button').onclick = function(){
+        document.querySelector('.form-input').classList.remove('active');
+        inputValue = document.querySelectorAll('input')[0].value; //Lấy dãy số người dùng nhập vào
+        numberArray = exchangeArray(inputValue);
+        if (document.querySelectorAll('input')[0].value === '') {
+            alert('vui lòng nhập số')
+        } else {
+            alert('Hãy ghi nhớ dãy số: '+ numberArray)
+            document.querySelector('.form-input').classList.remove('active');
+            document.querySelectorAll('.question')[0].classList.add('active');
+            document.querySelector('.fa-long-arrow-alt-down').style.opacity  = '0';
+            time.classList.add('active');
+            let__go.classList.add('start');
+            let__go.setAttribute('title', 'game is loading...')
+            game.classList.replace('text-success', 'text-warning');
+            game.innerHTML = 'GAME LOADING...';
+            score.classList.add('active');
+            var timeRemaining = 10*60;
+            function setTimer() {
+                var minutes = Math.floor(timeRemaining / 60),
+                    seconds = timeRemaining % 60;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+                document.querySelector('.timer').innerHTML = 'Time Remaining: ' + minutes + ':' + seconds;
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    document.querySelector('.timer').innerHTML = 'Hết giờ! Số câu trả lời đúng của bạn là: ' + correctAnswer;
+                    game.innerHTML ='END GAME!';
+                    game.classList.replace('text-warning', 'text-danger')
+                    document.querySelector('ion-icon').setAttribute('title', 'Game is over!')
+                } else {
+                    timeRemaining--;
+                }
+            }
+    
+            var timerInterval = setInterval(setTimer, 1000);
+            setTimer(); // Gọi ngay lần đầu tiên để hiển thị đúng thời gian ban đầu
+        }
+    }
+            startGame = false
     }
 }
-function showQuestion(id, index, plus){
-    var  question = document.querySelectorAll(id)[index],
-        questionNext =document.querySelectorAll(id)[index+plus]
-    // Toggle the 'active' class on the answer
-    question.classList.remove('active');
-    questionNext.classList.add('active')
+    begin = false
 }
 
-function showAnswer(id, index) {
-    var answer = document.querySelectorAll(id)[index],
-        show1 = document.querySelectorAll('.fa-square-plus')[index],
-        show2 = document.querySelectorAll('.fa-square-minus')[index];
-    
-    // Toggle the 'active' class on the answer
-    answer.classList.toggle('active');
-    
-    if (answer.classList.contains('active')) {
-        show1.classList.remove('active');
-        show2.classList.add('active');
-    } else {
-        show1.classList.add('active');
-        show2.classList.remove('active');
-    }
-}
 
 
 
