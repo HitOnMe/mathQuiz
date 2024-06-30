@@ -196,8 +196,8 @@ let__go.onclick = function(){
                     answer.classList.add('active');
                     alert(correctAnswer)
                 }
-                if (userAnswer === correctAnswer){
-                    response.innerHTML = 'Chính xác! Câu trả lời là: ' + correct(numberArray) +' <br> Chúc mừng bạn được cộng thêm 1 điểm!'
+                if (userAnswer == correctAnswer){
+                    response.innerHTML = 'Chính xác! Câu trả lời là: ' + correctAnswer +' <br> Chúc mừng bạn được cộng thêm 1 điểm!'
                     response.classList.replace('text-danger', 'text-success')
                     document.querySelectorAll('.answer')[index].style.transition = 'all .5s ease-in-out';
                     score+=1
