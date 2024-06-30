@@ -75,7 +75,6 @@
           />
           <div
             class="show__answer col-1 d-flex justify-content-center align-items-center"
-            onclick="showAnswer('.answer', 0)"
           >
             <span
               class="fa-regular fa-square-plus active"
@@ -115,7 +114,6 @@
           />
           <div
             class="show__answer col-1 d-flex justify-content-center align-items-center"
-            onclick="showAnswer('.answer', 1)"
           >
             <span
               class="fa-regular fa-square-plus active"
@@ -156,7 +154,6 @@
           />
           <div
             class="show__answer col-1 d-flex justify-content-center align-items-center"
-            onclick="showAnswer('.answer', 2)"
           >
             <span
               class="fa-regular fa-square-plus active"
@@ -197,7 +194,6 @@
           />
           <div
             class="show__answer col-1 d-flex justify-content-center align-items-center"
-            onclick="showAnswer('.answer', 3)"
           >
             <span
               class="fa-regular fa-square-plus active"
@@ -238,7 +234,6 @@
           />
           <div
             class="show__answer col-1 d-flex justify-content-center align-items-center"
-            onclick="showAnswer('.answer', 4)"
           >
             <span
               class="fa-regular fa-square-plus active"
@@ -274,13 +269,16 @@
           <input type="checkbox" checked class="form-control" />
           <input
             type="text"
-            class="col-3"
+            class="user__choose col-3"
             placeholder="Hai vị trí muốn đổi chỗ"
           />
-          <input type="text" class="col-4" placeholder="Nhập vào dãy số mới" />
+          <input
+            type="text"
+            class="col-4 user__answer"
+            placeholder="Nhập vào dãy số mới"
+          />
           <div
             class="show__answer col-1 d-flex justify-content-center align-items-center"
-            onclick="showAnswer('.answer', 5)"
           >
             <span
               class="fa-regular fa-square-plus active"
@@ -321,7 +319,6 @@
           />
           <div
             class="show__answer col-1 d-flex justify-content-center align-items-center"
-            onclick="showAnswer('.answer', 6)"
           >
             <span
               class="fa-regular fa-square-plus active"
@@ -362,7 +359,6 @@
           />
           <div
             class="show__answer col-1 d-flex justify-content-center align-items-center"
-            onclick="showAnswer('.answer', 7)"
           >
             <span
               class="fa-regular fa-square-plus active"
@@ -399,13 +395,16 @@
           <input type="checkbox" checked class="form-control" />
           <input
             type="text"
-            class="col-4"
+            class="col-4 user__choose"
             placeholder="Nhập vào dãy số thực mới"
           />
-          <input type="text" class="col-2" placeholder="Tổng số nguyên" />
+          <input
+            type="text"
+            class="col-2 user__answer"
+            placeholder="Tổng số nguyên"
+          />
           <div
             class="show__answer col-1 d-flex justify-content-center align-items-center"
-            onclick="showAnswer('.answer', 8)"
           >
             <span
               class="fa-regular fa-square-plus active"
@@ -442,11 +441,10 @@
           <input
             type="text"
             class="user__answer col-5"
-            placeholder="nhập '0' nếu là số âm, '1'nếu là số dương"
+            placeholder="nhập '0' nếu là số âm, '1'nếu là số dương(hoặc bằng nhau)"
           />
           <div
             class="show__answer col-1 d-flex justify-content-center align-items-center"
-            onclick="showAnswer('.answer', 9)"
           >
             <span
               class="fa-regular fa-square-plus active"
@@ -474,11 +472,14 @@
             </div>
           </div>
           <div class="d-flex justify-content-end">
-            <button class="btn btn-success text-white">Done</button>
+            <button class="btn btn-success text-white finish">Done</button>
           </div>
         </div>
       </div>
       <div class="timer"></div>
+      <div class="quiz__finish">
+        Xin chúc mừng bạn đã làm xong bài Quiz! Số điểm của bạn là:
+      </div>
     </div>
 
     <!-- Optional JavaScript -->

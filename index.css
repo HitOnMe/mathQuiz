@@ -51,13 +51,14 @@ ion-icon.start{
     transform:rotate(90deg)
 }
 
-.form-input, .score{
+.form-input, .score, .quiz__finish{
     display: none
 }
 .active{
     display: block
 }
 .answer{
+    align-items: center;
     max-height: 0;
     opacity: 0;
     transform: translateY(20px);
