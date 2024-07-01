@@ -100,10 +100,11 @@ function question5(numberArray){
 
 /* Câu 6: Đỗi chỗ 2 vị trí bất kỳ nhập từ người dùng, sắp xếp lại mảng */
 function question6(numberArray, index1, index2){
-    var position = numberArray[index2]; // vị trị mỏ neo position lấy giá trị từ index 2
-        numberArray[index2] = numberArray[index1]; // gán giá trị tại index 2 = vị trí index 1
-        numberArray[index1] = position;// đặt lại vị trí index1 = mỏ neo
-    return numberArray.join(',')              //trả về chuỗi mới
+    var numberArray2 = numberArray.slice(), //tạo bản sao numberArray
+        position = numberArray2[index2]; // vị trị mỏ neo position lấy giá trị từ index 2
+        numberArray2[index2] = numberArray2[index1]; // gán giá trị tại index 2 = vị trí index 1
+        numberArray2[index1] = position;// đặt lại vị trí index1 = mỏ neo
+    return numberArray2.join(',')              //trả về chuỗi mới
 }
 
 /* Câu 7: Sắp hết mảng theo giá trị tăng dần */
@@ -156,9 +157,8 @@ while (begin){
     let__go = document.querySelector('ion-icon'),
     userScore = document.querySelector('.score'),
     score = 0,
-    inputValue = ''
-    numberArray = 0,
-    inCorrect = true,
+    inputValue = '',
+    numberArray = [],
     timeRemaining = 10*60
     function showQuestion(id, index, plus){
         var question = document.querySelectorAll(id)[index],
@@ -171,52 +171,14 @@ while (begin){
 let__go.onclick = function(){
     document.querySelector('.form-input').classList.add('active');
     startGame = true
-    while (startGame) {
-        document.querySelectorAll('.show__answer').forEach((element, index) => {
-           
-            element.onclick = function(){
-                var answer = document.querySelectorAll('.answer')[index],
-                response = document.querySelectorAll('.answer p')[index],
-                userAnswer = document.querySelectorAll('.user__answer')[index].value,
-                correct  =  window[`question${index+1}`];
-                if (index == 8) {
-                    numberArray = exchangeArray(document.querySelectorAll('.user__choose')[1].value)
-                } 
-                correctAnswer = correct(numberArray)
-
-                if (index == 5){
-                    let index = exchangeArray(document.querySelectorAll('.user__choose')[0].value);
-                    index[1] = index[1] <= numberArray.length ? index[1] : numberArray.length-1 
-                    correctAnswer = numberArray.length !=1 || index.length !=1 ? correct(numberArray, index[0], index[1]) : correct(numberArray, index[0], 0)
-                }
-                
-                if(userAnswer == ''){
-                    alert('Vui lòng nhập câu trả lời');
-                } else{
-                    answer.classList.add('active');
-                    alert(correctAnswer)
-                }
-                if (userAnswer == correctAnswer){
-                    response.innerHTML = 'Chính xác! Câu trả lời là: ' + correctAnswer +' <br> Chúc mừng bạn được cộng thêm 1 điểm!'
-                    response.classList.replace('text-danger', 'text-success')
-                    document.querySelectorAll('.answer')[index].style.transition = 'all .5s ease-in-out';
-                    score+=1
-                    userScore.innerHTML = 'Your score: '+score + '/10';
-                    element.onclick = null
-                } else{
-                    response.innerHTML = 'Sai rồi ~ Hãy thử lại';
-                    response.classList.replace('text-success', 'text-danger')
-                }
-            }
-        })
+    if (startGame) {
         document.querySelector('.form-input button').onclick = function(){
             let__go.onclick = null;
             inputValue = document.querySelectorAll('input')[0].value; //Lấy dãy số người dùng nhập vào
-            numberArray = exchangeArray(inputValue);
         if (document.querySelectorAll('input')[0].value === '') {
             alert('vui lòng nhập số')
         } else {
-            alert('Hãy ghi nhớ dãy số: '+ numberArray)
+            alert('Hãy ghi nhớ dãy số: '+ inputValue)
             document.querySelector('.form-input').classList.remove('active');
             document.querySelectorAll('.question')[0].classList.add('active');
             document.querySelector('.fa-long-arrow-alt-down').style.opacity  = '0';
@@ -237,6 +199,7 @@ let__go.onclick = function(){
                     game.innerHTML ='END GAME!';
                     game.classList.replace('text-warning', 'text-danger')
                     let__go.setAttribute('title', 'Game is over!')
+                    
                 } else {
                     timeRemaining--;
                     time.classList.add('text-success')
@@ -250,6 +213,38 @@ let__go.onclick = function(){
             setTimer(); // Gọi ngay lần đầu tiên để hiển thị đúng thời gian ban đầu
         }
     }
+        document.querySelectorAll('.show__answer').forEach((element, index) => {
+           
+            element.onclick = function(){
+                var answer = document.querySelectorAll('.answer')[index],
+                response = document.querySelectorAll('.answer p')[index],
+                userAnswer = document.querySelectorAll('.user__answer')[index].value,
+                correct  =  window[`question${index+1}`],
+                numberArray = index!=8 ? exchangeArray(inputValue) : exchangeArray(document.querySelectorAll('.user__choose')[1].value),  //trường hợp câu hỏi 9
+                position = exchangeArray(document.querySelectorAll('.user__choose')[0].value);
+                position[1] = position[1] <= numberArray.length ? position[1] : numberArray.length-1 
+                correctAnswer = index!=5 ? correct(numberArray) : numberArray.length !=1 || position.length !=1 ? correct(numberArray, position[0], position[1]) : correct(numberArray, position[0], 0);
+  //trường hợp câu hỏi 6               
+                if(userAnswer == ''){
+                    alert('Vui lòng nhập câu trả lời');
+                } else{
+                    answer.classList.add('active');
+                    alert(correctAnswer)
+                }
+                if (userAnswer == correctAnswer){
+                    response.innerHTML = 'Chính xác! Câu trả lời là: ' + correctAnswer +' <br> Chúc mừng bạn được cộng thêm 1 điểm!'
+                    response.classList.replace('text-danger', 'text-success')
+                    document.querySelectorAll('.answer')[index].style.transition = 'all .5s ease-in-out';
+                    score+=1
+                    userScore.innerHTML = 'Your score: '+score + '/10';
+                    element.onclick = null
+                } else{
+                    response.innerHTML = 'Sai rồi ~ Hãy thử lại';
+                    response.classList.replace('text-success', 'text-danger')
+                } 
+            }
+        })
+        
             startGame = false
     }
 }; document.querySelector('.finish').onclick = function(){
