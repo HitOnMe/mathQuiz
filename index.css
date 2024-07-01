@@ -51,7 +51,7 @@ ion-icon.start{
     transform:rotate(90deg)
 }
 
-.form-input, .score, .quiz__finish{
+.form-input, .score, .quiz__finish, .timer{
     display: none
 }
 .active{
